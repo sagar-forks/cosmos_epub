@@ -9,14 +9,14 @@ void main() async {
   // Initializer and methods return a bool
   var _initialized = await CosmosEpub.initialize();
 
-  if (_initialized) {
+  /*if (_initialized) {
     // Use BookProgressModel model instance anywhere in your app to access current book progress of specific book
     BookProgressModel bookProgress = CosmosEpub.getBookProgress('bookId');
     await CosmosEpub.setCurrentPageIndex('bookId', 1);
     await CosmosEpub.setCurrentChapterIndex('bookId', 2);
     await CosmosEpub.deleteBookProgress('bookId');
     await CosmosEpub.deleteAllBooksProgress();
-  }
+  }*/
 
   runApp(MyApp());
 }
@@ -49,14 +49,15 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<void> _openEpubReader(BuildContext context) async {
     await CosmosEpub.openAssetBook(
-        assetPath: 'assets/book.epub',
+        //assetPath: 'assets/book.epub',
+        assetPath: 'assets/pahichan.epub',
         context: context,
         bookId: '3',
         onPageFlip: (int currentPage, int totalPages) {
-          print(currentPage);
+          print("onPageFlip: currentPage=$currentPage/$totalPages");
         },
         onLastPage: (int lastPageIndex) {
-          print('We arrived to the last widget');
+          print('onLastPage: We arrived to the last widget');
         });
   }
 
@@ -78,8 +79,8 @@ class _MyHomePageState extends State<MyHomePage> {
             lateFuture();
           },
           style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(Colors.yellow),
-              padding: MaterialStateProperty.all(EdgeInsets.all(20))),
+              backgroundColor: WidgetStateProperty.all(Colors.yellow),
+              padding: WidgetStateProperty.all(EdgeInsets.all(20))),
           child: FutureBuilder<void>(
             future: readerFuture, // Set the future to the async operation
             builder: (context, snapshot) {

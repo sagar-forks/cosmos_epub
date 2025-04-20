@@ -3,220 +3,364 @@
 part of 'book_progress_model.dart';
 
 // **************************************************************************
-// IsarCollectionGenerator
+// _IsarCollectionGenerator
 // **************************************************************************
 
 // coverage:ignore-file
-// ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, prefer_const_constructors, lines_longer_than_80_chars, require_trailing_commas, inference_failure_on_function_invocation, unnecessary_parenthesis, unnecessary_raw_strings, unnecessary_null_checks, join_return_with_assignment, prefer_final_locals, avoid_js_rounded_ints, avoid_positional_boolean_parameters, always_specify_types
+// ignore_for_file: duplicate_ignore, invalid_use_of_protected_member, lines_longer_than_80_chars, constant_identifier_names, avoid_js_rounded_ints, no_leading_underscores_for_local_identifiers, require_trailing_commas, unnecessary_parenthesis, unnecessary_raw_strings, unnecessary_null_in_if_null_operators, library_private_types_in_public_api, prefer_const_constructors
+// ignore_for_file: type=lint
 
 extension GetBookProgressModelCollection on Isar {
-  IsarCollection<BookProgressModel> get bookProgressModels => this.collection();
+  IsarCollection<int, BookProgressModel> get bookProgressModels =>
+      this.collection();
 }
 
-const BookProgressModelSchema = CollectionSchema(
-  name: r'BookProgressModel',
-  id: 2050998199370397082,
-  properties: {
-    r'bookId': PropertySchema(
-      id: 0,
-      name: r'bookId',
-      type: IsarType.string,
-    ),
-    r'currentChapterIndex': PropertySchema(
-      id: 1,
-      name: r'currentChapterIndex',
-      type: IsarType.long,
-    ),
-    r'currentPageIndex': PropertySchema(
-      id: 2,
-      name: r'currentPageIndex',
-      type: IsarType.long,
-    )
-  },
-  estimateSize: _bookProgressModelEstimateSize,
-  serialize: _bookProgressModelSerialize,
-  deserialize: _bookProgressModelDeserialize,
-  deserializeProp: _bookProgressModelDeserializeProp,
-  idName: r'localId',
-  indexes: {},
-  links: {},
-  embeddedSchemas: {},
-  getId: _bookProgressModelGetId,
-  getLinks: _bookProgressModelGetLinks,
-  attach: _bookProgressModelAttach,
-  version: '3.1.0+1',
+const BookProgressModelSchema = IsarGeneratedSchema(
+  schema: IsarSchema(
+    name: 'BookProgressModel',
+    idName: 'id',
+    embedded: false,
+    properties: [
+      IsarPropertySchema(
+        name: 'bookId',
+        type: IsarType.string,
+      ),
+      IsarPropertySchema(
+        name: 'currentChapterIndex',
+        type: IsarType.long,
+      ),
+      IsarPropertySchema(
+        name: 'currentPageIndex',
+        type: IsarType.long,
+      ),
+    ],
+    indexes: [],
+  ),
+  converter: IsarObjectConverter<int, BookProgressModel>(
+    serialize: serializeBookProgressModel,
+    deserialize: deserializeBookProgressModel,
+    deserializeProperty: deserializeBookProgressModelProp,
+  ),
+  embeddedSchemas: [],
 );
 
-int _bookProgressModelEstimateSize(
-  BookProgressModel object,
-  List<int> offsets,
-  Map<Type, List<int>> allOffsets,
-) {
-  var bytesCount = offsets.last;
+@isarProtected
+int serializeBookProgressModel(IsarWriter writer, BookProgressModel object) {
   {
     final value = object.bookId;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
+    if (value == null) {
+      IsarCore.writeNull(writer, 1);
+    } else {
+      IsarCore.writeString(writer, 1, value);
     }
   }
-  return bytesCount;
+  IsarCore.writeLong(
+      writer, 2, object.currentChapterIndex ?? -9223372036854775808);
+  IsarCore.writeLong(
+      writer, 3, object.currentPageIndex ?? -9223372036854775808);
+  return object.id;
 }
 
-void _bookProgressModelSerialize(
-  BookProgressModel object,
-  IsarWriter writer,
-  List<int> offsets,
-  Map<Type, List<int>> allOffsets,
-) {
-  writer.writeString(offsets[0], object.bookId);
-  writer.writeLong(offsets[1], object.currentChapterIndex);
-  writer.writeLong(offsets[2], object.currentPageIndex);
-}
-
-BookProgressModel _bookProgressModelDeserialize(
-  Id id,
-  IsarReader reader,
-  List<int> offsets,
-  Map<Type, List<int>> allOffsets,
-) {
+@isarProtected
+BookProgressModel deserializeBookProgressModel(IsarReader reader) {
+  final String? _bookId;
+  _bookId = IsarCore.readString(reader, 1);
+  final int? _currentChapterIndex;
+  {
+    final value = IsarCore.readLong(reader, 2);
+    if (value == -9223372036854775808) {
+      _currentChapterIndex = null;
+    } else {
+      _currentChapterIndex = value;
+    }
+  }
+  final int? _currentPageIndex;
+  {
+    final value = IsarCore.readLong(reader, 3);
+    if (value == -9223372036854775808) {
+      _currentPageIndex = null;
+    } else {
+      _currentPageIndex = value;
+    }
+  }
   final object = BookProgressModel(
-    bookId: reader.readStringOrNull(offsets[0]),
-    currentChapterIndex: reader.readLongOrNull(offsets[1]),
-    currentPageIndex: reader.readLongOrNull(offsets[2]),
+    bookId: _bookId,
+    currentChapterIndex: _currentChapterIndex,
+    currentPageIndex: _currentPageIndex,
   );
-  object.localId = id;
+  object.id = IsarCore.readId(reader);
   return object;
 }
 
-P _bookProgressModelDeserializeProp<P>(
-  IsarReader reader,
-  int propertyId,
-  int offset,
-  Map<Type, List<int>> allOffsets,
-) {
-  switch (propertyId) {
+@isarProtected
+dynamic deserializeBookProgressModelProp(IsarReader reader, int property) {
+  switch (property) {
     case 0:
-      return (reader.readStringOrNull(offset)) as P;
+      return IsarCore.readId(reader);
     case 1:
-      return (reader.readLongOrNull(offset)) as P;
+      return IsarCore.readString(reader, 1);
     case 2:
-      return (reader.readLongOrNull(offset)) as P;
-    default:
-      throw IsarError('Unknown property with id $propertyId');
-  }
-}
-
-Id _bookProgressModelGetId(BookProgressModel object) {
-  return object.localId;
-}
-
-List<IsarLinkBase<dynamic>> _bookProgressModelGetLinks(
-    BookProgressModel object) {
-  return [];
-}
-
-void _bookProgressModelAttach(
-    IsarCollection<dynamic> col, Id id, BookProgressModel object) {
-  object.localId = id;
-}
-
-extension BookProgressModelQueryWhereSort
-    on QueryBuilder<BookProgressModel, BookProgressModel, QWhere> {
-  QueryBuilder<BookProgressModel, BookProgressModel, QAfterWhere> anyLocalId() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(const IdWhereClause.any());
-    });
-  }
-}
-
-extension BookProgressModelQueryWhere
-    on QueryBuilder<BookProgressModel, BookProgressModel, QWhereClause> {
-  QueryBuilder<BookProgressModel, BookProgressModel, QAfterWhereClause>
-      localIdEqualTo(Id localId) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(IdWhereClause.between(
-        lower: localId,
-        upper: localId,
-      ));
-    });
-  }
-
-  QueryBuilder<BookProgressModel, BookProgressModel, QAfterWhereClause>
-      localIdNotEqualTo(Id localId) {
-    return QueryBuilder.apply(this, (query) {
-      if (query.whereSort == Sort.asc) {
-        return query
-            .addWhereClause(
-              IdWhereClause.lessThan(upper: localId, includeUpper: false),
-            )
-            .addWhereClause(
-              IdWhereClause.greaterThan(lower: localId, includeLower: false),
-            );
-      } else {
-        return query
-            .addWhereClause(
-              IdWhereClause.greaterThan(lower: localId, includeLower: false),
-            )
-            .addWhereClause(
-              IdWhereClause.lessThan(upper: localId, includeUpper: false),
-            );
+      {
+        final value = IsarCore.readLong(reader, 2);
+        if (value == -9223372036854775808) {
+          return null;
+        } else {
+          return value;
+        }
       }
-    });
+    case 3:
+      {
+        final value = IsarCore.readLong(reader, 3);
+        if (value == -9223372036854775808) {
+          return null;
+        } else {
+          return value;
+        }
+      }
+    default:
+      throw ArgumentError('Unknown property: $property');
   }
+}
 
-  QueryBuilder<BookProgressModel, BookProgressModel, QAfterWhereClause>
-      localIdGreaterThan(Id localId, {bool include = false}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IdWhereClause.greaterThan(lower: localId, includeLower: include),
-      );
-    });
-  }
+sealed class _BookProgressModelUpdate {
+  bool call({
+    required int id,
+    String? bookId,
+    int? currentChapterIndex,
+    int? currentPageIndex,
+  });
+}
 
-  QueryBuilder<BookProgressModel, BookProgressModel, QAfterWhereClause>
-      localIdLessThan(Id localId, {bool include = false}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(
-        IdWhereClause.lessThan(upper: localId, includeUpper: include),
-      );
-    });
-  }
+class _BookProgressModelUpdateImpl implements _BookProgressModelUpdate {
+  const _BookProgressModelUpdateImpl(this.collection);
 
-  QueryBuilder<BookProgressModel, BookProgressModel, QAfterWhereClause>
-      localIdBetween(
-    Id lowerLocalId,
-    Id upperLocalId, {
-    bool includeLower = true,
-    bool includeUpper = true,
+  final IsarCollection<int, BookProgressModel> collection;
+
+  @override
+  bool call({
+    required int id,
+    Object? bookId = ignore,
+    Object? currentChapterIndex = ignore,
+    Object? currentPageIndex = ignore,
   }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addWhereClause(IdWhereClause.between(
-        lower: lowerLocalId,
-        includeLower: includeLower,
-        upper: upperLocalId,
-        includeUpper: includeUpper,
-      ));
+    return collection.updateProperties([
+          id
+        ], {
+          if (bookId != ignore) 1: bookId as String?,
+          if (currentChapterIndex != ignore) 2: currentChapterIndex as int?,
+          if (currentPageIndex != ignore) 3: currentPageIndex as int?,
+        }) >
+        0;
+  }
+}
+
+sealed class _BookProgressModelUpdateAll {
+  int call({
+    required List<int> id,
+    String? bookId,
+    int? currentChapterIndex,
+    int? currentPageIndex,
+  });
+}
+
+class _BookProgressModelUpdateAllImpl implements _BookProgressModelUpdateAll {
+  const _BookProgressModelUpdateAllImpl(this.collection);
+
+  final IsarCollection<int, BookProgressModel> collection;
+
+  @override
+  int call({
+    required List<int> id,
+    Object? bookId = ignore,
+    Object? currentChapterIndex = ignore,
+    Object? currentPageIndex = ignore,
+  }) {
+    return collection.updateProperties(id, {
+      if (bookId != ignore) 1: bookId as String?,
+      if (currentChapterIndex != ignore) 2: currentChapterIndex as int?,
+      if (currentPageIndex != ignore) 3: currentPageIndex as int?,
     });
   }
+}
+
+extension BookProgressModelUpdate on IsarCollection<int, BookProgressModel> {
+  _BookProgressModelUpdate get update => _BookProgressModelUpdateImpl(this);
+
+  _BookProgressModelUpdateAll get updateAll =>
+      _BookProgressModelUpdateAllImpl(this);
+}
+
+sealed class _BookProgressModelQueryUpdate {
+  int call({
+    String? bookId,
+    int? currentChapterIndex,
+    int? currentPageIndex,
+  });
+}
+
+class _BookProgressModelQueryUpdateImpl
+    implements _BookProgressModelQueryUpdate {
+  const _BookProgressModelQueryUpdateImpl(this.query, {this.limit});
+
+  final IsarQuery<BookProgressModel> query;
+  final int? limit;
+
+  @override
+  int call({
+    Object? bookId = ignore,
+    Object? currentChapterIndex = ignore,
+    Object? currentPageIndex = ignore,
+  }) {
+    return query.updateProperties(limit: limit, {
+      if (bookId != ignore) 1: bookId as String?,
+      if (currentChapterIndex != ignore) 2: currentChapterIndex as int?,
+      if (currentPageIndex != ignore) 3: currentPageIndex as int?,
+    });
+  }
+}
+
+extension BookProgressModelQueryUpdate on IsarQuery<BookProgressModel> {
+  _BookProgressModelQueryUpdate get updateFirst =>
+      _BookProgressModelQueryUpdateImpl(this, limit: 1);
+
+  _BookProgressModelQueryUpdate get updateAll =>
+      _BookProgressModelQueryUpdateImpl(this);
+}
+
+class _BookProgressModelQueryBuilderUpdateImpl
+    implements _BookProgressModelQueryUpdate {
+  const _BookProgressModelQueryBuilderUpdateImpl(this.query, {this.limit});
+
+  final QueryBuilder<BookProgressModel, BookProgressModel, QOperations> query;
+  final int? limit;
+
+  @override
+  int call({
+    Object? bookId = ignore,
+    Object? currentChapterIndex = ignore,
+    Object? currentPageIndex = ignore,
+  }) {
+    final q = query.build();
+    try {
+      return q.updateProperties(limit: limit, {
+        if (bookId != ignore) 1: bookId as String?,
+        if (currentChapterIndex != ignore) 2: currentChapterIndex as int?,
+        if (currentPageIndex != ignore) 3: currentPageIndex as int?,
+      });
+    } finally {
+      q.close();
+    }
+  }
+}
+
+extension BookProgressModelQueryBuilderUpdate
+    on QueryBuilder<BookProgressModel, BookProgressModel, QOperations> {
+  _BookProgressModelQueryUpdate get updateFirst =>
+      _BookProgressModelQueryBuilderUpdateImpl(this, limit: 1);
+
+  _BookProgressModelQueryUpdate get updateAll =>
+      _BookProgressModelQueryBuilderUpdateImpl(this);
 }
 
 extension BookProgressModelQueryFilter
     on QueryBuilder<BookProgressModel, BookProgressModel, QFilterCondition> {
   QueryBuilder<BookProgressModel, BookProgressModel, QAfterFilterCondition>
+      idEqualTo(
+    int value,
+  ) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        EqualCondition(
+          property: 0,
+          value: value,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<BookProgressModel, BookProgressModel, QAfterFilterCondition>
+      idGreaterThan(
+    int value,
+  ) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        GreaterCondition(
+          property: 0,
+          value: value,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<BookProgressModel, BookProgressModel, QAfterFilterCondition>
+      idGreaterThanOrEqualTo(
+    int value,
+  ) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        GreaterOrEqualCondition(
+          property: 0,
+          value: value,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<BookProgressModel, BookProgressModel, QAfterFilterCondition>
+      idLessThan(
+    int value,
+  ) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        LessCondition(
+          property: 0,
+          value: value,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<BookProgressModel, BookProgressModel, QAfterFilterCondition>
+      idLessThanOrEqualTo(
+    int value,
+  ) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        LessOrEqualCondition(
+          property: 0,
+          value: value,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<BookProgressModel, BookProgressModel, QAfterFilterCondition>
+      idBetween(
+    int lower,
+    int upper,
+  ) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        BetweenCondition(
+          property: 0,
+          lower: lower,
+          upper: upper,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<BookProgressModel, BookProgressModel, QAfterFilterCondition>
       bookIdIsNull() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'bookId',
-      ));
+      return query.addFilterCondition(const IsNullCondition(property: 1));
     });
   }
 
   QueryBuilder<BookProgressModel, BookProgressModel, QAfterFilterCondition>
       bookIdIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'bookId',
-      ));
+    return QueryBuilder.apply(not(), (query) {
+      return query.addFilterCondition(const IsNullCondition(property: 1));
     });
   }
 
@@ -226,43 +370,77 @@ extension BookProgressModelQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'bookId',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        EqualCondition(
+          property: 1,
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
   QueryBuilder<BookProgressModel, BookProgressModel, QAfterFilterCondition>
       bookIdGreaterThan(
     String? value, {
-    bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'bookId',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        GreaterCondition(
+          property: 1,
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<BookProgressModel, BookProgressModel, QAfterFilterCondition>
+      bookIdGreaterThanOrEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        GreaterOrEqualCondition(
+          property: 1,
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
   QueryBuilder<BookProgressModel, BookProgressModel, QAfterFilterCondition>
       bookIdLessThan(
     String? value, {
-    bool include = false,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'bookId',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        LessCondition(
+          property: 1,
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<BookProgressModel, BookProgressModel, QAfterFilterCondition>
+      bookIdLessThanOrEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        LessOrEqualCondition(
+          property: 1,
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
@@ -270,19 +448,17 @@ extension BookProgressModelQueryFilter
       bookIdBetween(
     String? lower,
     String? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'bookId',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        BetweenCondition(
+          property: 1,
+          lower: lower,
+          upper: upper,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
@@ -292,11 +468,13 @@ extension BookProgressModelQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'bookId',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        StartsWithCondition(
+          property: 1,
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
@@ -306,257 +484,263 @@ extension BookProgressModelQueryFilter
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'bookId',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        EndsWithCondition(
+          property: 1,
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
   QueryBuilder<BookProgressModel, BookProgressModel, QAfterFilterCondition>
       bookIdContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'bookId',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        ContainsCondition(
+          property: 1,
+          value: value,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
   QueryBuilder<BookProgressModel, BookProgressModel, QAfterFilterCondition>
       bookIdMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'bookId',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
+      return query.addFilterCondition(
+        MatchesCondition(
+          property: 1,
+          wildcard: pattern,
+          caseSensitive: caseSensitive,
+        ),
+      );
     });
   }
 
   QueryBuilder<BookProgressModel, BookProgressModel, QAfterFilterCondition>
       bookIdIsEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'bookId',
-        value: '',
-      ));
+      return query.addFilterCondition(
+        const EqualCondition(
+          property: 1,
+          value: '',
+        ),
+      );
     });
   }
 
   QueryBuilder<BookProgressModel, BookProgressModel, QAfterFilterCondition>
       bookIdIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'bookId',
-        value: '',
-      ));
+      return query.addFilterCondition(
+        const GreaterCondition(
+          property: 1,
+          value: '',
+        ),
+      );
     });
   }
 
   QueryBuilder<BookProgressModel, BookProgressModel, QAfterFilterCondition>
       currentChapterIndexIsNull() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'currentChapterIndex',
-      ));
+      return query.addFilterCondition(const IsNullCondition(property: 2));
     });
   }
 
   QueryBuilder<BookProgressModel, BookProgressModel, QAfterFilterCondition>
       currentChapterIndexIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'currentChapterIndex',
-      ));
+    return QueryBuilder.apply(not(), (query) {
+      return query.addFilterCondition(const IsNullCondition(property: 2));
     });
   }
 
   QueryBuilder<BookProgressModel, BookProgressModel, QAfterFilterCondition>
-      currentChapterIndexEqualTo(int? value) {
+      currentChapterIndexEqualTo(
+    int? value,
+  ) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'currentChapterIndex',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        EqualCondition(
+          property: 2,
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<BookProgressModel, BookProgressModel, QAfterFilterCondition>
       currentChapterIndexGreaterThan(
-    int? value, {
-    bool include = false,
-  }) {
+    int? value,
+  ) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'currentChapterIndex',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        GreaterCondition(
+          property: 2,
+          value: value,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<BookProgressModel, BookProgressModel, QAfterFilterCondition>
+      currentChapterIndexGreaterThanOrEqualTo(
+    int? value,
+  ) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        GreaterOrEqualCondition(
+          property: 2,
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<BookProgressModel, BookProgressModel, QAfterFilterCondition>
       currentChapterIndexLessThan(
-    int? value, {
-    bool include = false,
-  }) {
+    int? value,
+  ) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'currentChapterIndex',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        LessCondition(
+          property: 2,
+          value: value,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<BookProgressModel, BookProgressModel, QAfterFilterCondition>
+      currentChapterIndexLessThanOrEqualTo(
+    int? value,
+  ) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        LessOrEqualCondition(
+          property: 2,
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<BookProgressModel, BookProgressModel, QAfterFilterCondition>
       currentChapterIndexBetween(
     int? lower,
-    int? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
+    int? upper,
+  ) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'currentChapterIndex',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
+      return query.addFilterCondition(
+        BetweenCondition(
+          property: 2,
+          lower: lower,
+          upper: upper,
+        ),
+      );
     });
   }
 
   QueryBuilder<BookProgressModel, BookProgressModel, QAfterFilterCondition>
       currentPageIndexIsNull() {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'currentPageIndex',
-      ));
+      return query.addFilterCondition(const IsNullCondition(property: 3));
     });
   }
 
   QueryBuilder<BookProgressModel, BookProgressModel, QAfterFilterCondition>
       currentPageIndexIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'currentPageIndex',
-      ));
+    return QueryBuilder.apply(not(), (query) {
+      return query.addFilterCondition(const IsNullCondition(property: 3));
     });
   }
 
   QueryBuilder<BookProgressModel, BookProgressModel, QAfterFilterCondition>
-      currentPageIndexEqualTo(int? value) {
+      currentPageIndexEqualTo(
+    int? value,
+  ) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'currentPageIndex',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        EqualCondition(
+          property: 3,
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<BookProgressModel, BookProgressModel, QAfterFilterCondition>
       currentPageIndexGreaterThan(
-    int? value, {
-    bool include = false,
-  }) {
+    int? value,
+  ) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'currentPageIndex',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        GreaterCondition(
+          property: 3,
+          value: value,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<BookProgressModel, BookProgressModel, QAfterFilterCondition>
+      currentPageIndexGreaterThanOrEqualTo(
+    int? value,
+  ) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        GreaterOrEqualCondition(
+          property: 3,
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<BookProgressModel, BookProgressModel, QAfterFilterCondition>
       currentPageIndexLessThan(
-    int? value, {
-    bool include = false,
-  }) {
+    int? value,
+  ) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'currentPageIndex',
-        value: value,
-      ));
+      return query.addFilterCondition(
+        LessCondition(
+          property: 3,
+          value: value,
+        ),
+      );
+    });
+  }
+
+  QueryBuilder<BookProgressModel, BookProgressModel, QAfterFilterCondition>
+      currentPageIndexLessThanOrEqualTo(
+    int? value,
+  ) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(
+        LessOrEqualCondition(
+          property: 3,
+          value: value,
+        ),
+      );
     });
   }
 
   QueryBuilder<BookProgressModel, BookProgressModel, QAfterFilterCondition>
       currentPageIndexBetween(
     int? lower,
-    int? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
+    int? upper,
+  ) {
     return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'currentPageIndex',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
-    });
-  }
-
-  QueryBuilder<BookProgressModel, BookProgressModel, QAfterFilterCondition>
-      localIdEqualTo(Id value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'localId',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<BookProgressModel, BookProgressModel, QAfterFilterCondition>
-      localIdGreaterThan(
-    Id value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'localId',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<BookProgressModel, BookProgressModel, QAfterFilterCondition>
-      localIdLessThan(
-    Id value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'localId',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<BookProgressModel, BookProgressModel, QAfterFilterCondition>
-      localIdBetween(
-    Id lower,
-    Id upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'localId',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
+      return query.addFilterCondition(
+        BetweenCondition(
+          property: 3,
+          lower: lower,
+          upper: upper,
+        ),
+      );
     });
   }
 }
@@ -564,162 +748,238 @@ extension BookProgressModelQueryFilter
 extension BookProgressModelQueryObject
     on QueryBuilder<BookProgressModel, BookProgressModel, QFilterCondition> {}
 
-extension BookProgressModelQueryLinks
-    on QueryBuilder<BookProgressModel, BookProgressModel, QFilterCondition> {}
-
 extension BookProgressModelQuerySortBy
     on QueryBuilder<BookProgressModel, BookProgressModel, QSortBy> {
-  QueryBuilder<BookProgressModel, BookProgressModel, QAfterSortBy>
-      sortByBookId() {
+  QueryBuilder<BookProgressModel, BookProgressModel, QAfterSortBy> sortById() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'bookId', Sort.asc);
+      return query.addSortBy(0);
     });
   }
 
   QueryBuilder<BookProgressModel, BookProgressModel, QAfterSortBy>
-      sortByBookIdDesc() {
+      sortByIdDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'bookId', Sort.desc);
+      return query.addSortBy(0, sort: Sort.desc);
+    });
+  }
+
+  QueryBuilder<BookProgressModel, BookProgressModel, QAfterSortBy> sortByBookId(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(
+        1,
+        caseSensitive: caseSensitive,
+      );
+    });
+  }
+
+  QueryBuilder<BookProgressModel, BookProgressModel, QAfterSortBy>
+      sortByBookIdDesc({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(
+        1,
+        sort: Sort.desc,
+        caseSensitive: caseSensitive,
+      );
     });
   }
 
   QueryBuilder<BookProgressModel, BookProgressModel, QAfterSortBy>
       sortByCurrentChapterIndex() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'currentChapterIndex', Sort.asc);
+      return query.addSortBy(2);
     });
   }
 
   QueryBuilder<BookProgressModel, BookProgressModel, QAfterSortBy>
       sortByCurrentChapterIndexDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'currentChapterIndex', Sort.desc);
+      return query.addSortBy(2, sort: Sort.desc);
     });
   }
 
   QueryBuilder<BookProgressModel, BookProgressModel, QAfterSortBy>
       sortByCurrentPageIndex() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'currentPageIndex', Sort.asc);
+      return query.addSortBy(3);
     });
   }
 
   QueryBuilder<BookProgressModel, BookProgressModel, QAfterSortBy>
       sortByCurrentPageIndexDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'currentPageIndex', Sort.desc);
+      return query.addSortBy(3, sort: Sort.desc);
     });
   }
 }
 
 extension BookProgressModelQuerySortThenBy
     on QueryBuilder<BookProgressModel, BookProgressModel, QSortThenBy> {
-  QueryBuilder<BookProgressModel, BookProgressModel, QAfterSortBy>
-      thenByBookId() {
+  QueryBuilder<BookProgressModel, BookProgressModel, QAfterSortBy> thenById() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'bookId', Sort.asc);
+      return query.addSortBy(0);
     });
   }
 
   QueryBuilder<BookProgressModel, BookProgressModel, QAfterSortBy>
-      thenByBookIdDesc() {
+      thenByIdDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'bookId', Sort.desc);
+      return query.addSortBy(0, sort: Sort.desc);
+    });
+  }
+
+  QueryBuilder<BookProgressModel, BookProgressModel, QAfterSortBy> thenByBookId(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(1, caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<BookProgressModel, BookProgressModel, QAfterSortBy>
+      thenByBookIdDesc({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(1, sort: Sort.desc, caseSensitive: caseSensitive);
     });
   }
 
   QueryBuilder<BookProgressModel, BookProgressModel, QAfterSortBy>
       thenByCurrentChapterIndex() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'currentChapterIndex', Sort.asc);
+      return query.addSortBy(2);
     });
   }
 
   QueryBuilder<BookProgressModel, BookProgressModel, QAfterSortBy>
       thenByCurrentChapterIndexDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'currentChapterIndex', Sort.desc);
+      return query.addSortBy(2, sort: Sort.desc);
     });
   }
 
   QueryBuilder<BookProgressModel, BookProgressModel, QAfterSortBy>
       thenByCurrentPageIndex() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'currentPageIndex', Sort.asc);
+      return query.addSortBy(3);
     });
   }
 
   QueryBuilder<BookProgressModel, BookProgressModel, QAfterSortBy>
       thenByCurrentPageIndexDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'currentPageIndex', Sort.desc);
-    });
-  }
-
-  QueryBuilder<BookProgressModel, BookProgressModel, QAfterSortBy>
-      thenByLocalId() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'localId', Sort.asc);
-    });
-  }
-
-  QueryBuilder<BookProgressModel, BookProgressModel, QAfterSortBy>
-      thenByLocalIdDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'localId', Sort.desc);
+      return query.addSortBy(3, sort: Sort.desc);
     });
   }
 }
 
 extension BookProgressModelQueryWhereDistinct
     on QueryBuilder<BookProgressModel, BookProgressModel, QDistinct> {
-  QueryBuilder<BookProgressModel, BookProgressModel, QDistinct>
+  QueryBuilder<BookProgressModel, BookProgressModel, QAfterDistinct>
       distinctByBookId({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'bookId', caseSensitive: caseSensitive);
+      return query.addDistinctBy(1, caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<BookProgressModel, BookProgressModel, QDistinct>
+  QueryBuilder<BookProgressModel, BookProgressModel, QAfterDistinct>
       distinctByCurrentChapterIndex() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'currentChapterIndex');
+      return query.addDistinctBy(2);
     });
   }
 
-  QueryBuilder<BookProgressModel, BookProgressModel, QDistinct>
+  QueryBuilder<BookProgressModel, BookProgressModel, QAfterDistinct>
       distinctByCurrentPageIndex() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'currentPageIndex');
+      return query.addDistinctBy(3);
     });
   }
 }
 
-extension BookProgressModelQueryProperty
-    on QueryBuilder<BookProgressModel, BookProgressModel, QQueryProperty> {
-  QueryBuilder<BookProgressModel, int, QQueryOperations> localIdProperty() {
+extension BookProgressModelQueryProperty1
+    on QueryBuilder<BookProgressModel, BookProgressModel, QProperty> {
+  QueryBuilder<BookProgressModel, int, QAfterProperty> idProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'localId');
+      return query.addProperty(0);
     });
   }
 
-  QueryBuilder<BookProgressModel, String?, QQueryOperations> bookIdProperty() {
+  QueryBuilder<BookProgressModel, String?, QAfterProperty> bookIdProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'bookId');
+      return query.addProperty(1);
     });
   }
 
-  QueryBuilder<BookProgressModel, int?, QQueryOperations>
+  QueryBuilder<BookProgressModel, int?, QAfterProperty>
       currentChapterIndexProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'currentChapterIndex');
+      return query.addProperty(2);
     });
   }
 
-  QueryBuilder<BookProgressModel, int?, QQueryOperations>
+  QueryBuilder<BookProgressModel, int?, QAfterProperty>
       currentPageIndexProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'currentPageIndex');
+      return query.addProperty(3);
+    });
+  }
+}
+
+extension BookProgressModelQueryProperty2<R>
+    on QueryBuilder<BookProgressModel, R, QAfterProperty> {
+  QueryBuilder<BookProgressModel, (R, int), QAfterProperty> idProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addProperty(0);
+    });
+  }
+
+  QueryBuilder<BookProgressModel, (R, String?), QAfterProperty>
+      bookIdProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addProperty(1);
+    });
+  }
+
+  QueryBuilder<BookProgressModel, (R, int?), QAfterProperty>
+      currentChapterIndexProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addProperty(2);
+    });
+  }
+
+  QueryBuilder<BookProgressModel, (R, int?), QAfterProperty>
+      currentPageIndexProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addProperty(3);
+    });
+  }
+}
+
+extension BookProgressModelQueryProperty3<R1, R2>
+    on QueryBuilder<BookProgressModel, (R1, R2), QAfterProperty> {
+  QueryBuilder<BookProgressModel, (R1, R2, int), QOperations> idProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addProperty(0);
+    });
+  }
+
+  QueryBuilder<BookProgressModel, (R1, R2, String?), QOperations>
+      bookIdProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addProperty(1);
+    });
+  }
+
+  QueryBuilder<BookProgressModel, (R1, R2, int?), QOperations>
+      currentChapterIndexProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addProperty(2);
+    });
+  }
+
+  QueryBuilder<BookProgressModel, (R1, R2, int?), QOperations>
+      currentPageIndexProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addProperty(3);
     });
   }
 }

@@ -11,12 +11,20 @@ class IsarService {
 
   static Future<Isar> buildIsarService() async {
     final dir = await getApplicationDocumentsDirectory();
+    final isar = await Isar.openAsync(
+      schemas: [BookProgressModelSchema],
+      directory: dir.path,
+    );
+    IsarService._create(isar);
+    return isar;
+
+    /*final dir = await getApplicationDocumentsDirectory();
 
     var isarInstance = Isar.getInstance('cosmos_epub');
 
     if (isarInstance == null) {
-      final isar = await Isar.open(
-        [BookProgressModelSchema],
+      final isar = await Isar.openAsync(
+        schemas: [BookProgressModelSchema],
         name: 'cosmos_epub',
         directory: dir.path,
       );
@@ -25,6 +33,6 @@ class IsarService {
       return isar;
     } else {
       return isarInstance;
-    }
+    }*/
   }
 }
